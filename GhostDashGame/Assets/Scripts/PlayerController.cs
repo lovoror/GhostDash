@@ -4,16 +4,24 @@ using UnityEngine;
 
 
 [RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(BoxCollider2D))]
 public class PlayerController : MonoBehaviour {
 
     Rigidbody2D rb;
     Vector2 _velocity;
     Vector2 _dashOffset;
+
+
+    BoxCollider2D boxCollider;
+
     public bool isDashing { get; private set; }
 
 
     void Start() {
         rb = GetComponent<Rigidbody2D>();
+        rb.gravityScale = 0;
+
+        boxCollider = GetComponent<BoxCollider2D>();
     }
 
     public void Move(Vector2 velocity) {
@@ -37,7 +45,7 @@ public class PlayerController : MonoBehaviour {
 
     IEnumerator Dash(Vector2 direction, float speed, float duration) {
         isDashing = true;
-        GetComponent<CircleCollider2D>().enabled = false;       //   disable collisions
+        boxCollider.enabled = false;       //   disable collisions
         float time = 0;
         while (time < duration) {
             time += Time.deltaTime;
@@ -45,7 +53,7 @@ public class PlayerController : MonoBehaviour {
             yield return null;
         }
         isDashing = false;
-        GetComponent<CircleCollider2D>().enabled = true;
+        boxCollider.enabled = true;
     }
 
 }
