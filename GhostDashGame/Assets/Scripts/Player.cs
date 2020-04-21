@@ -7,6 +7,10 @@ using UnityEngine;
 public class Player : MonoBehaviour {
 
     public float moveSpeed = 4;
+    public float dashDistance = 6;
+    public float timeBetweenDashes = 2;
+
+    float lastDashTime = -2;
 
     PlayerController playerController;
 
@@ -15,11 +19,24 @@ public class Player : MonoBehaviour {
     }
 
 
+
     void Update() {
         //  MOVEMENT INPUT
         Vector2 moveInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         Vector2 moveVelocity = moveInput.normalized * moveSpeed;
 
-        playerController.Move(moveVelocity);
+        if ((Input.GetAxisRaw("Dash") == 1) && (Time.time > lastDashTime + timeBetweenDashes)) {
+            lastDashTime = Time.time;
+            playerController.DashTowards(MousePosition(), dashDistance);
+            print("dash");
+        } else {
+
+            playerController.Move(moveVelocity);
+        }
+
+    }
+
+    Vector2 MousePosition() {
+        return new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y);
     }
 }
