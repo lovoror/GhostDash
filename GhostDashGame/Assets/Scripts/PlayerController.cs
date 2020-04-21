@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour {
 
     void Start() {
         rb = GetComponent<Rigidbody2D>();
+        rb.gravityScale = 0;
     }
 
     public void Move(Vector2 velocity) {
