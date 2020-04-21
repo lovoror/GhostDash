@@ -37,7 +37,7 @@ public class PlayerController : MonoBehaviour {
 
     IEnumerator Dash(Vector2 direction, float speed, float duration) {
         isDashing = true;
-        GetComponent<CircleCollider2D>().enabled = false;       //   disable collisions
+        GetComponent<BoxCollider2D>().enabled = false;       //   disable collisions
         float time = 0;
         while (time < duration) {
             time += Time.deltaTime;
@@ -45,7 +45,7 @@ public class PlayerController : MonoBehaviour {
             yield return null;
         }
         isDashing = false;
-        GetComponent<CircleCollider2D>().enabled = true;
+        GetComponent<BoxCollider2D>().enabled = true;
     }
 
 }

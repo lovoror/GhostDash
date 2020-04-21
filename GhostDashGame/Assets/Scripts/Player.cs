@@ -33,7 +33,7 @@ public class Player : MonoBehaviour {
                 
                 lastDashTime = Time.time;
                 playerController.DashTowards(MousePosition(), dashDistance, dashDuration);
-                print("dash");
+                print("dash from " + transform.position + " to " + MousePosition());
             } else {
 
                 playerController.Move(moveVelocity);
