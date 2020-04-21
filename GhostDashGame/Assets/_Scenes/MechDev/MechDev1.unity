@@ -452,3 +452,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 4
+  dashDistance: 6
+  timeBetweenDashes: 2
+  dashDuration: 0.2

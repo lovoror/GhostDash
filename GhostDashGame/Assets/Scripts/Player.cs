@@ -6,11 +6,14 @@ using UnityEngine;
 [RequireComponent(typeof(PlayerController))]
 public class Player : MonoBehaviour {
 
-    public float moveSpeed = 4;
+    public float moveSpeed = 4;     //  walking speed
     public float dashDistance = 6;
-    public float timeBetweenDashes = 2;
+    public float timeBetweenDashes = 2;         //  min time in seconds between dashes
+    public float dashDuration = .5f;        //  dash anim duration
 
-    float lastDashTime = -2;
+    float lastDashTime = -2;        //  last time player dashed
+
+    //  bool isDashing = false;         //  to check if it is currently dashing
 
     PlayerController playerController;
 
@@ -22,16 +25,19 @@ public class Player : MonoBehaviour {
 
     void Update() {
         //  MOVEMENT INPUT
-        Vector2 moveInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-        Vector2 moveVelocity = moveInput.normalized * moveSpeed;
+        if (!playerController.isDashing) {
+            Vector2 moveInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+            Vector2 moveVelocity = moveInput.normalized * moveSpeed;
 
-        if ((Input.GetAxisRaw("Dash") == 1) && (Time.time > lastDashTime + timeBetweenDashes)) {
-            lastDashTime = Time.time;
-            playerController.DashTowards(MousePosition(), dashDistance);
-            print("dash");
-        } else {
+            if ((Input.GetAxisRaw("Dash") == 1) && (Time.time > lastDashTime + timeBetweenDashes)) {
+                
+                lastDashTime = Time.time;
+                playerController.DashTowards(MousePosition(), dashDistance, dashDuration);
+                print("dash");
+            } else {
 
-            playerController.Move(moveVelocity);
+                playerController.Move(moveVelocity);
+            }
         }
 
     }
