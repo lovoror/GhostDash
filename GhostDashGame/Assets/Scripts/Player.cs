@@ -19,7 +19,6 @@ public class Player : MonoBehaviour {
 
     private void Awake() {
         playerController = GetComponent<PlayerController>();
-        
     }
 
 
