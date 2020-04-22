@@ -11,6 +11,8 @@ public class PlayerController : MonoBehaviour {
     Vector2 _velocity;
     Vector2 _dashOffset;
 
+    Vector2 a, b;
+
 
     BoxCollider2D boxCollider;
 
@@ -45,6 +47,7 @@ public class PlayerController : MonoBehaviour {
 
     IEnumerator Dash(Vector2 direction, float speed, float duration) {
         isDashing = true;
+        a = rb.position;
         boxCollider.enabled = false;       //   disable collisions
         float time = 0;
         while (time < duration) {
@@ -54,6 +57,9 @@ public class PlayerController : MonoBehaviour {
         }
         isDashing = false;
         boxCollider.enabled = true;
+        b = rb.position;
+
+        print((b - a).magnitude);
     }
 
 }

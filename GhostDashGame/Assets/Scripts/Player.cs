@@ -7,7 +7,7 @@ using UnityEngine;
 public class Player : MonoBehaviour {
 
     public float moveSpeed = 4;     //  walking speed
-    public float dashDistance = 6;
+    public float dashDistance = 6;      //  get, private set?
     public float timeBetweenDashes = 2;         //  min time in seconds between dashes
     public float dashDuration = .25f;        //  dash anim duration
 
