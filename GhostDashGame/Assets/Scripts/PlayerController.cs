@@ -11,6 +11,8 @@ public class PlayerController : MonoBehaviour {
     Vector2 _velocity;
     Vector2 _dashOffset;
 
+    Vector2 a, b;
+
 
     BoxCollider2D boxCollider;
 
@@ -28,11 +30,14 @@ public class PlayerController : MonoBehaviour {
         _velocity = velocity;
     }
 
+    public void Stop() {
+        _velocity = Vector2.zero;
+    }
+
     public void DashTowards(Vector2 point, float dashDistance, float duration) {
         Vector2 dashDirection = (point - rb.position).normalized;
 
         Vector2 dash = dashDirection * dashDistance;
-        //   rb.position += dash;
 
         float dashSpeed = dashDistance / duration;
         StartCoroutine(Dash( dashDirection, dashSpeed, duration ));
@@ -45,6 +50,7 @@ public class PlayerController : MonoBehaviour {
 
     IEnumerator Dash(Vector2 direction, float speed, float duration) {
         isDashing = true;
+        a = rb.position;
         boxCollider.enabled = false;       //   disable collisions
         float time = 0;
         while (time < duration) {
@@ -54,6 +60,8 @@ public class PlayerController : MonoBehaviour {
         }
         isDashing = false;
         boxCollider.enabled = true;
+        b = rb.position;
+
     }
 
 }
