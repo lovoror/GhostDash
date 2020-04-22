@@ -9,7 +9,7 @@ public class Player : MonoBehaviour {
     public float moveSpeed = 4;     //  walking speed
     public float dashDistance = 6;
     public float timeBetweenDashes = 2;         //  min time in seconds between dashes
-    public float dashDuration = .5f;        //  dash anim duration
+    public float dashDuration = .25f;        //  dash anim duration
 
     float lastDashTime = -2;        //  last time player dashed
 
@@ -34,7 +34,7 @@ public class Player : MonoBehaviour {
                 
                 lastDashTime = Time.time;
                 playerController.DashTowards(MousePosition(), dashDistance, dashDuration);
-                print("dash");
+                print("dash from " + transform.position + " to " + MousePosition());
             } else {
 
                 playerController.Move(moveVelocity);
