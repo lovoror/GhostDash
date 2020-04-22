@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class DashCircle : MonoBehaviour {
 
+    public bool followPlayer;
 
     Player player;
     float radius;
@@ -24,7 +25,7 @@ public class DashCircle : MonoBehaviour {
 
 
     void Update() {
-        if (player != null) {
+        if (player != null && followPlayer) {
             transform.position = player.transform.position;
         }
     }

@@ -30,6 +30,10 @@ public class PlayerController : MonoBehaviour {
         _velocity = velocity;
     }
 
+    public void Stop() {
+        _velocity = Vector2.zero;
+    }
+
     public void DashTowards(Vector2 point, float dashDistance, float duration) {
         Vector2 dashDirection = (point - rb.position).normalized;
 
