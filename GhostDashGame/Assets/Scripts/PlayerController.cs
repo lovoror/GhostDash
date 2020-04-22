@@ -38,7 +38,6 @@ public class PlayerController : MonoBehaviour {
         Vector2 dashDirection = (point - rb.position).normalized;
 
         Vector2 dash = dashDirection * dashDistance;
-        //   rb.position += dash;
 
         float dashSpeed = dashDistance / duration;
         StartCoroutine(Dash( dashDirection, dashSpeed, duration ));
@@ -63,7 +62,6 @@ public class PlayerController : MonoBehaviour {
         boxCollider.enabled = true;
         b = rb.position;
 
-        print((b - a).magnitude);
     }
 
 }

@@ -16,11 +16,8 @@ public class DashCircle : MonoBehaviour {
             player = FindObjectOfType<Player>();
         }
 
-
         radius = player.dashDistance;
         transform.localScale = new Vector3(radius*2, radius*2, transform.localScale.z);
-
-
     }
 
 

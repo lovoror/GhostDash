@@ -56,7 +56,7 @@ public class Player : MonoBehaviour {
         Destroy(newDashCircle);
         playerController.DashTowards(MousePosition(), dashDistance, dashDuration);
         dashCircleActive = false;
-        print("dash from " + transform.position + " to " + MousePosition());
+        
     }
 
     Vector2 MousePosition() {
