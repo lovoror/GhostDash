@@ -13,7 +13,9 @@ public class Player : LivingEntity {
     public float dashDistance = 6;      //  get, private set?
     public float timeBetweenDashes = 2;         //  min time in seconds between dashes
     public float dashDuration = .25f;        //  dash anim duration
+    public float maxTimeToDash = 1;     //  max time in second to release the mouse button
 
+    float dashTriggerTime;
     float lastDashTime = -2;        //  last time player dashed
 
     //  bool isDashing = false;         //  to check if it is currently dashing
@@ -44,19 +46,28 @@ public class Player : LivingEntity {
     }
 
     IEnumerator Dash() {
-        lastDashTime = Time.time;
+        bool dashConfirmed;
+        // inizia il conto del tempo che hai per lasciare il pulsante
+        dashTriggerTime = 0;
         // crea il cerchio
         var newDashCircle = Instantiate(dashCirclePrefab, transform.position, Quaternion.identity);
         dashCircleActive = true;
         // aspetta che lasci il tasto
-        while(Input.GetAxisRaw("Dash") != 0) {
+        while((Input.GetAxisRaw("Dash") != 0) && (dashTriggerTime < maxTimeToDash)) {
+            dashTriggerTime += Time.deltaTime;
             yield return null;
         }
         //distruggi il cerchio e dasha
-        Destroy(newDashCircle);
-        playerController.DashTowards(MousePosition(), dashDistance, dashDuration);
-        dashCircleActive = false;
+        if (dashTriggerTime < maxTimeToDash) {
+            playerController.DashTowards(MousePosition(), dashDistance, dashDuration);
+        }
         
+        Destroy(newDashCircle);
+
+        dashCircleActive = false;
+
+        lastDashTime = Time.time;
+
     }
 
     Vector2 MousePosition() {
