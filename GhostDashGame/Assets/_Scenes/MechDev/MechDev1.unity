@@ -467,6 +467,7 @@ MonoBehaviour:
   dashCirclePrefab: {fileID: 2389674662798630048, guid: 009e564e2424bb544b0ac1ada783498a,
     type: 3}
   moveSpeed: 4
-  dashDistance: 6
+  dashDistance: 4
   timeBetweenDashes: 2
   dashDuration: 0.2
+  maxTimeToDash: 2
