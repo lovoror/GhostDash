@@ -1,0 +1,29 @@
+//This Behaviour Tree controls the 'Patroller' unit.
+
+tree("Root")
+    // This unit attacks when possible, otherwise it patrols a predefined path.
+    fallback
+        tree("Attack")
+        tree("Chase")
+        tree("Patroll")
+
+tree("Attack")
+	//Attack the enemy if visible.
+    sequence
+        IsPlayerVisible
+        Attack
+
+tree("Chase")
+    // Chase the player if you know where to go
+    sequence
+        PlayerPositionKnown
+        ChasePlayer
+
+tree("Patroll")
+	//While no enemy is spotted,
+	//follow the assigned waypoints.
+    Patrolling
+
+
+
+
