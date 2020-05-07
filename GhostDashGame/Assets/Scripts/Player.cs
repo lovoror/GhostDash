@@ -46,8 +46,8 @@ public class Player : MonoBehaviour {
     }
 
     IEnumerator Dash() {
-        bool dashConfirmed;
-        // inizia il conto del tempo che hai per lasciare il pulsante
+        //  bool dashConfirmed;     //  unused
+        //  inizia il conto del tempo che hai per lasciare il pulsante
         dashTriggerTime = 0;
         // crea il cerchio
         var newDashCircle = Instantiate(dashCirclePrefab, transform.position, Quaternion.identity);
