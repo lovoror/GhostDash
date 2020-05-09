@@ -18,13 +18,15 @@ public class Player : MonoBehaviour {
     float dashTriggerTime;
     float lastDashTime = -2;        //  last time player dashed
 
+    Animator animator;
+
     //  bool isDashing = false;         //  to check if it is currently dashing
 
     PlayerController playerController;
 
     private void Awake() {
         playerController = GetComponent<PlayerController>();
-        
+        animator = GetComponent<Animator>();
     }
 
 
@@ -38,8 +40,11 @@ public class Player : MonoBehaviour {
             if ((Input.GetAxisRaw("Dash") == 1) && (Time.time > lastDashTime + timeBetweenDashes)) {
                 StartCoroutine(Dash());
                 playerController.Stop();
+                animator.SetFloat("Speed", 0);
             } else {
                 playerController.Move(moveVelocity);
+                animator.SetFloat("Speed", moveInput.magnitude);
+                if(moveInput.magnitude >0.01) transform.localScale = new Vector3(0.0553f * Mathf.Sign(moveInput.x),0.0553f,0.0553f);
             }
         }
 
