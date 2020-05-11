@@ -1,20 +1,15 @@
 ﻿<Properties StartupConfiguration="{A352D2E4-5BD9-2C9B-D363-2C7F22F47C38}|">
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/EnemyAI.cs">
     <Files>
-      <File FileName="Assets/Scripts/EnemyAI.cs" Line="66" Column="42" />
-      <File FileName="Assets/PandaBehaviour/Trees/New Panda Script.BT.txt" Line="8" Column="24" />
+      <File FileName="Assets/Scripts/EnemyAI (copy).cs" Line="84" Column="97" />
+      <File FileName="Assets/Scripts/Navigator.cs" Line="11" Column="31" />
+      <File FileName="Assets/PandaBehaviour/Trees/EnemyBT.txt" Line="16" Column="21" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="GhostDashGame" expanded="True">
             <Node name="Assets" expanded="True">
-              <Node name="AstarPathfindingProject" expanded="True">
-                <Node name="Behaviors" expanded="True" />
-              </Node>
-              <Node name="PandaBehaviour" expanded="True">
-                <Node name="Trees" expanded="True" />
-              </Node>
               <Node name="Scripts" expanded="True">
                 <Node name="EnemyAI.cs" selected="True" />
               </Node>
@@ -26,7 +21,7 @@
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="2d545ed6-be4d-404b-879b-6b5b24a57e1c" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="845048b5-5d6a-4b11-8c90-f89740550b26" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
