@@ -9,25 +9,24 @@ public class EnemyAI : MonoBehaviour
 
     GameObject player;
     PandaBehaviour tree;
-    AIDestinationSetter destinationsetter;
-    AIPath pathPlanner;
+    Navigator navigator;
 
+    GameObject lastKnownPlayerPos;
     GameObject[] patrolPath;
     int waypoint = 0;
 
-    float viewAngle = 70;
+    float hearingDistance = 2;
+    float viewAngle = 70;       // view angle per side
     float viewDistance = 100;
     LayerMask mask;
 
-    GameObject lastKnownPlayerPos;
 
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
         tree = GetComponent<PandaBehaviour>();
-        destinationsetter = GetComponent<AIDestinationSetter>();
-        pathPlanner = GetComponent<AIPath>();
+        navigator = GetComponent<Navigator>();
 
         mask = LayerMask.GetMask("Player", "Walls");
 
@@ -47,7 +46,7 @@ public class EnemyAI : MonoBehaviour
     {
         patrolPath = new GameObject[3];
         patrolPath[0] = new GameObject();
-        patrolPath[0].transform.position = new Vector2(-5, 1);
+        patrolPath[0].transform.position = new Vector2(-8, 1);
         patrolPath[1] = new GameObject();
         patrolPath[1].transform.position = new Vector2(0, -5);
         patrolPath[2] = new GameObject();
@@ -71,14 +70,18 @@ public class EnemyAI : MonoBehaviour
     }
 
     [Task]
-    public void Attack()
+    public bool IsPlayerColse()
     {
-        pathPlanner.maxSpeed = 0.03f;
-        pathPlanner.rotationSpeed = 0;
+        return Vector2.Distance(transform.position, player.transform.position) < hearingDistance;
+    }
+
+    [Task]
+    public void LookAtPlayer()
+    {
+        navigator.navigate = false; // stop moving
 
         Quaternion rotation = Quaternion.LookRotation(player.transform.forward, player.transform.position - transform.position);
         transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * 8);
-        // fier!   
     }
 
     [Task]
@@ -86,7 +89,7 @@ public class EnemyAI : MonoBehaviour
     {
         if (lastKnownPlayerPos != null)
         {
-            if (Vector2.Distance(transform.position, lastKnownPlayerPos.transform.position) < 0.1)
+            if (Vector2.Distance(transform.position, lastKnownPlayerPos.transform.position) < 0.5)
                 Destroy(lastKnownPlayerPos);
         }
 
@@ -96,18 +99,18 @@ public class EnemyAI : MonoBehaviour
     [Task]
     public void ChasePlayer()
     {
-        destinationsetter.target = lastKnownPlayerPos.transform;
-        pathPlanner.maxSpeed = 3;
-        pathPlanner.rotationSpeed = 600;
+        navigator.navigate = true;
+        navigator.target = lastKnownPlayerPos.transform;
+        navigator.speed = 150;
     }
 
 
     [Task]
     public void Patrolling()
     {
-        destinationsetter.target = patrolPath[waypoint].transform;
-        pathPlanner.maxSpeed = 1;
-        pathPlanner.rotationSpeed = 360;
+        navigator.navigate = true;
+        navigator.target = patrolPath[waypoint].transform;
+        navigator.speed = 50;
 
         if (Vector2.Distance(transform.position, patrolPath[waypoint].transform.position) < 1)
             waypoint = (waypoint + 1) % patrolPath.Length;
