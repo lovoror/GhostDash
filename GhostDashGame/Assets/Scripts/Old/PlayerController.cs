@@ -37,7 +37,12 @@ public class PlayerController : MonoBehaviour {
     public void DashTowards(Vector2 point, float dashDistance, float duration) {
         Vector2 dashDirection = (point - rb.position).normalized;
 
-        Vector2 dash = dashDirection * dashDistance;
+        //  Vector2 dash = dashDirection * dashDistance;
+        if ((rb.position - point).sqrMagnitude < dashDistance*dashDistance) {       //  il mouse è nel cerchio
+            dashDistance = Vector2.Distance(rb.position, point);
+        }
+
+
 
         float dashSpeed = dashDistance / duration;
         StartCoroutine(Dash( dashDirection, dashSpeed, duration ));
