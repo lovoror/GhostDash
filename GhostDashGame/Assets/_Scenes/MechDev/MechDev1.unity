@@ -546,10 +546,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cdc63487b522025499da4d110a75bb2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distanzaFissa: 1
+  distanzaFissa: 0
   dashCircleObj: {fileID: 1974281490}
   moveSpeed: 4
-  dashDistance: 4
-  timeBetweenDashes: 3
+  defaultDashDistance: 4
+  timeBetweenDashes: 1.5
   dashDuration: 0.2
   maxTimeToDash: 2

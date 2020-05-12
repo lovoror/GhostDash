@@ -15,7 +15,7 @@ public class DashCircle : MonoBehaviour {
             player = FindObjectOfType<Player>();
         }
 
-        radius = player.dashDistance;
+        radius = player.defaultDashDistance;
         transform.localScale = new Vector3(radius * 2, radius * 2, transform.localScale.z);
 
         UpdatePosition();
@@ -26,7 +26,7 @@ public class DashCircle : MonoBehaviour {
         if (player != null) {
             transform.position = player.transform.position;
         }
-        print("dashCircle: position updated");  
+        // print("dashCircle: position updated");  
     }
 
 }

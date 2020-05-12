@@ -14,7 +14,7 @@ public class Player : MonoBehaviour {
 
     public GameObject dashCircleObj;
     public float moveSpeed = 4;     //  walking speed
-    public float dashDistance = 6;      //  get, private set?
+    public float defaultDashDistance = 6;      //  get, private set?
     public float timeBetweenDashes = 2;         //  min time in seconds between dashes
     public float dashDuration = .25f;        //  dash anim duration
     public float maxTimeToDash = 1;     //  max time in second to release the mouse button
@@ -24,7 +24,7 @@ public class Player : MonoBehaviour {
 
 
     bool dashKeyPressed;
-    bool dashKeyReleased;
+    bool dashKeyReleased = true;
     bool isDashing;
     bool canDash;
 
@@ -36,18 +36,31 @@ public class Player : MonoBehaviour {
     }
 
     private void Start() {
-        lastDashTime = -timeBetweenDashes;
+        lastDashTime = -timeBetweenDashes;      //  per poter dashare fin dall'inizio
     }
 
     private void Update() {
-        dashKeyPressed = (Input.GetAxisRaw("Dash") == 1) ? true : false;
+        // dashKeyPressed = (Input.GetAxisRaw("Dash") == 1) ? true : false;
         canDash = (Time.time > lastDashTime + timeBetweenDashes);
 
+        //  Questo funziona solo se si usa il mouse!!!
+        if (Input.GetMouseButtonDown(0)) {
+            dashKeyPressed = true;
+        }
+
+        if (Input.GetMouseButtonUp(0)) {
+            dashKeyPressed = false;
+            dashKeyReleased = true;
+        }
+        // TODO: implementare la possibilità di cambiare input
+       
 
 
-        if (dashKeyPressed && !isDashing && canDash ) {
+        if (dashKeyPressed && dashKeyReleased && !isDashing && canDash) {
             StartCoroutine(Dash());
             isDashing = true;
+            dashKeyReleased = false;
+
         }
     }
 
@@ -58,7 +71,6 @@ public class Player : MonoBehaviour {
             Vector2 moveInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
             Vector2 moveVelocity = moveInput.normalized * moveSpeed;
             rb.MovePosition(rb.position + moveVelocity * Time.fixedDeltaTime);
-
         }
 
     }
@@ -67,6 +79,9 @@ public class Player : MonoBehaviour {
     IEnumerator Dash() {
         //  inizia il conto del tempo che hai per lasciare il pulsante
         dashTriggerTime = 0;
+
+        // dichiarandola ad inizio Dash, si usa di base quella di default
+        float dashDistance = defaultDashDistance;
 
         //  attiva il cerchio
         dashCircleObj.SetActive(true);
