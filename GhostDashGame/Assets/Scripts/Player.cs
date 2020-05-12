@@ -11,6 +11,7 @@ public class Player : MonoBehaviour {
 
     Rigidbody2D rb;
     BoxCollider2D boxCollider;
+    Animator animator;
 
     public GameObject dashCircleObj;
     public float moveSpeed = 4;     //  walking speed
@@ -31,6 +32,8 @@ public class Player : MonoBehaviour {
     void Awake() {
         rb = GetComponent<Rigidbody2D>();
         rb.gravityScale = 0;
+
+        animator = GetComponent<Animator>();
 
         boxCollider = GetComponent<BoxCollider2D>();
     }
@@ -53,13 +56,15 @@ public class Player : MonoBehaviour {
             dashKeyReleased = true;
         }
         // TODO: implementare la possibilità di cambiare input
-       
+
 
 
         if (dashKeyPressed && dashKeyReleased && !isDashing && canDash) {
             StartCoroutine(Dash());
             isDashing = true;
             dashKeyReleased = false;
+
+            animator.SetFloat("Speed", 0);
 
         }
     }
@@ -71,6 +76,11 @@ public class Player : MonoBehaviour {
             Vector2 moveInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
             Vector2 moveVelocity = moveInput.normalized * moveSpeed;
             rb.MovePosition(rb.position + moveVelocity * Time.fixedDeltaTime);
+
+            animator.SetFloat("Speed", moveInput.magnitude);
+            if (moveInput.magnitude > 0.01) {
+                transform.localScale = new Vector3(0.0553f * Mathf.Sign(moveInput.x), 0.0553f, 0.0553f);
+            }
         }
 
     }

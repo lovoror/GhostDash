@@ -522,6 +522,86 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90.089005}
+--- !u!1001 &1311745714
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2389674662798630048, guid: 009e564e2424bb544b0ac1ada783498a,
+        type: 3}
+      propertyPath: m_Name
+      value: Circle
+      objectReference: {fileID: 0}
+    - target: {fileID: 2389674662798630048, guid: 009e564e2424bb544b0ac1ada783498a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2389674662798630054, guid: 009e564e2424bb544b0ac1ada783498a,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2389674662798630054, guid: 009e564e2424bb544b0ac1ada783498a,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2389674662798630054, guid: 009e564e2424bb544b0ac1ada783498a,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2389674662798630054, guid: 009e564e2424bb544b0ac1ada783498a,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2389674662798630054, guid: 009e564e2424bb544b0ac1ada783498a,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2389674662798630054, guid: 009e564e2424bb544b0ac1ada783498a,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2389674662798630054, guid: 009e564e2424bb544b0ac1ada783498a,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2389674662798630054, guid: 009e564e2424bb544b0ac1ada783498a,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2389674662798630054, guid: 009e564e2424bb544b0ac1ada783498a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2389674662798630054, guid: 009e564e2424bb544b0ac1ada783498a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2389674662798630054, guid: 009e564e2424bb544b0ac1ada783498a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 009e564e2424bb544b0ac1ada783498a, type: 3}
+--- !u!1 &1311745715 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2389674662798630048, guid: 009e564e2424bb544b0ac1ada783498a,
+    type: 3}
+  m_PrefabInstance: {fileID: 1311745714}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1420846459
 GameObject:
   m_ObjectHideFlags: 0
@@ -644,7 +724,7 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
-  m_WarningMessage:
+  m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
@@ -751,11 +831,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1979553163}
+  - component: {fileID: 1979553166}
   - component: {fileID: 1979553170}
   - component: {fileID: 1979553164}
   - component: {fileID: 1979553169}
-  - component: {fileID: 1979553168}
-  - component: {fileID: 1979553167}
   - component: {fileID: 1979553165}
   m_Layer: 9
   m_Name: Player
@@ -843,11 +922,11 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
-  m_WarningMessage:
+  m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &1979553167
+--- !u!114 &1979553166
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -856,28 +935,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 1979553162}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 20d81d6b1f881ff4094b6ae99c99f398, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
-  dashCirclePrefab: {fileID: 2389674662798630048, guid: 009e564e2424bb544b0ac1ada783498a,
-    type: 3}
+  m_Script: {fileID: 11500000, guid: cdc63487b522025499da4d110a75bb2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distanzaFissa: 0
+  dashCircleObj: {fileID: 1311745715}
   moveSpeed: 4
-  dashDistance: 6
+  defaultDashDistance: 4
   timeBetweenDashes: 2
   dashDuration: 0.25
   maxTimeToDash: 1
---- !u!114 &1979553168
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1979553162}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 540dde914e4d0c3459ad3ae3e48c54e8, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
 --- !u!61 &1979553169
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1054,25 +1121,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2044225333
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2044225325}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cdc63487b522025499da4d110a75bb2d, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
-  distanzaFissa: 0
-  dashCircleObj: {fileID: 1974281490}
-  moveSpeed: 4
-  defaultDashDistance: 4
-  timeBetweenDashes: 1.5
-  dashDuration: 0.2
-  maxTimeToDash: 2
 --- !u!95 &2044225333
 Animator:
   serializedVersion: 3
@@ -1088,7 +1136,7 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
-  m_WarningMessage:
+  m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
@@ -1119,14 +1167,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 78396926cbbfc4ac3b48fc5fc34a87d1, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   version: 1
   data:
     dataString: UEsDBBQAAAgIAAAIIey7/TtQbwIAABIFAAALACQAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQFlVE1z2jAQ/SuMziVjO44/emsJIT3kY0I7ufgirDXWIEseSQ6QDP+9K9lgl54Qb3ef3r5d+YtwaVoordIrzdmTYkC+z4g7k2+zMfgIB7pVcs0/4ZzzzpmtXRL1OW/UcoV46MqMasBqXv6QW+GSAwQ7ySulmyXbwkIZaxCuqDCAIa2sq5YIfc3IAX/muSs54ilK3ekTT3kwO+GxBGlBj6nBTZwlSRRmd+lQgkgaxmme3MVDaXgT5FmQJMt5kHqSTpaCNi0w19HIFYUDRRj6NIm9DhkuUiohuBmEEntsvRHrtgYNzgnGKfbtxYU3GQI18G1tHfG0+qWqDNjBFk2P91yjgT0t+al6Vxtqdr2wDyo6d1F0l3hRPenTf/F5r7nSqnk83xsG7g5b83L3Ro8lNXZi+xS+n0j3/uyp2NGNgPca5LNaadVJhkGrO1faGYjux7+X1hY1lLsR76VegV07Gd55ZMOgXA8n3/1hIXiz6afZA2uhvOF+NUDjaH6hYL84ZqBA1Kn4Y+A33U43bAg8cG0shoYupZO3UZ12qWTpPXPddHahtAQPD6JbkFTY4yvS2OsRXsUm115FHqh7S8PlQ+z8RK5KPDzmB8FV6FXtL8Mytdo/galfOiu4hFG0CzyjTwslZb9hU0/OZetOV7SclG07zv5dLUJvyzSNgzhN4irIWTpncZ6yKLoN4iynt1lG/O5xiX1S8doLHezBqcmRXOKenT8xs5Wmrd92pul+xT8bNbGcy0qtSw0gX3qGi3DQeAk+S7ZkHA1ag7Vc+nmTr4IIVe6AFReiwne6PFhNi5GlIC3/UNYhBVn4b0pBTuT0F1BLAwQUAAAICAAACCHsFAzuUG0AAAB4AAAACQAkAG1ldGEuanNvbgoAIAAAAAAAAQAYAACAPtXesZ0BAIA+1d6xnQEAgD7V3rGdAatWKkstKs7Mz1OyUjDRM9IzNNVRUEovSizIKAaKGII4pZkpIHa0UqJxsrm5iYGJuZlJmoFlirluiomleYqRkbGBiYVlorGFhVIsUH1JZUGqX2JuKkRPQGJJRlpmXkpmXrqee1FmijvIaKXYWgBQSwECLQAUAAAICAAACCHsu/07UG8CAAASBQAACwAkAAAAAAAAAAAAAAAAAAAAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQFQSwECLQAUAAAICAAACCHsFAzuUG0AAAB4AAAACQAkAAAAAAAAAAAAAAC8AgAAbWV0YS5qc29uCgAgAAAAAAABABgAAIA+1d6xnQEAgD7V3rGdAQCAPtXesZ0BUEsFBgAAAAACAAIAuAAAAHQDAAAAAA==
-    upgradeData:
+    upgradeData: 
     file_cachedStartup: {fileID: 0}
-    data_cachedStartup:
+    data_cachedStartup: 
     cacheStartup: 0
   showNavGraphs: 1
   showUnwalkableNodes: 1
