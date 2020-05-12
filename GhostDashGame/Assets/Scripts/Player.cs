@@ -12,7 +12,6 @@ public class Player : MonoBehaviour {
     Rigidbody2D rb;
     BoxCollider2D boxCollider;
 
-    public GameObject dashCirclePrefab;
     public GameObject dashCircleObj;
     public float moveSpeed = 4;     //  walking speed
     public float dashDistance = 6;      //  get, private set?
@@ -21,11 +20,13 @@ public class Player : MonoBehaviour {
     public float maxTimeToDash = 1;     //  max time in second to release the mouse button
 
     float dashTriggerTime;
-    float lastDashTime = -2;        //  last time player dashed
+    float lastDashTime;        //  last time player dashed
 
 
-    public bool dashKeyPressed { get; private set; }
+    bool dashKeyPressed;
+    bool dashKeyReleased;
     bool isDashing;
+    bool canDash;
 
     void Awake() {
         rb = GetComponent<Rigidbody2D>();
@@ -34,37 +35,34 @@ public class Player : MonoBehaviour {
         boxCollider = GetComponent<BoxCollider2D>();
     }
 
+    private void Start() {
+        lastDashTime = -timeBetweenDashes;
+    }
+
     private void Update() {
         dashKeyPressed = (Input.GetAxisRaw("Dash") == 1) ? true : false;
+        canDash = (Time.time > lastDashTime + timeBetweenDashes);
 
-        if (dashKeyPressed && !isDashing) {
+
+
+        if (dashKeyPressed && !isDashing && canDash ) {
             StartCoroutine(Dash());
             isDashing = true;
         }
     }
 
+
+
     private void FixedUpdate() {
-        if (!dashKeyPressed) {
+        if (!dashKeyPressed || !canDash) {
             Vector2 moveInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
             Vector2 moveVelocity = moveInput.normalized * moveSpeed;
             rb.MovePosition(rb.position + moveVelocity * Time.fixedDeltaTime);
 
         }
 
-        /*
-        if (Input.GetButtonDown("Dash") && (Time.time > lastDashTime + timeBetweenDashes)) {    //  lmb premuto, iniziare dash
-            dashKeyPressed = true;
-            StartCoroutine(Dash());
-            print("lmb down");
-        }
-
-        if (Input.GetButtonUp("Dash") && dashKeyPressed) {    //  lmb rilasciato, se in tempo dasha
-            dashKeyPressed = false;
-            print("lmb up");
-        }
-        */
-
     }
+
 
     IEnumerator Dash() {
         //  inizia il conto del tempo che hai per lasciare il pulsante
@@ -115,62 +113,26 @@ public class Player : MonoBehaviour {
             lastDashTime = Time.time;
 
         } else {    //  se non è in tempo, restituisci il controllo
-            dashKeyPressed = false;
-            print("lmb released (simulated)");
+            //dashKeyPressed = false;
+            StartCoroutine(CancelDash());
         }
 
         isDashing = false;
     }
 
-
-    /*
-    IEnumerator Dash_old() {
-        //  inizia il conto del tempo che hai per lasciare il pulsante
-        dashTriggerTime = 0;
-        // crea il cerchio
-        var newDashCircle = Instantiate(dashCirclePrefab, transform.position, Quaternion.identity);
-        dashCircleActive = true;
-        // aspetta che lasci il tasto
-        while ((Input.GetAxisRaw("Dash") != 0) && (dashTriggerTime < maxTimeToDash)) {
-            dashTriggerTime += Time.deltaTime;
+    IEnumerator CancelDash() {
+        while (dashKeyPressed) {
+            canDash = false;
             yield return null;
         }
-        //distruggi il cerchio e dasha
-        if (dashTriggerTime < maxTimeToDash) {
-            //  playerController.DashTowards(MousePosition(), dashDistance, dashDuration);
-
-            Vector2 dashDirection = (MousePosition() - rb.position).normalized;
-            if ((rb.position - MousePosition()).sqrMagnitude < dashDistance * dashDistance) {       //  il mouse è nel cerchio
-                dashDistance = Vector2.Distance(rb.position, MousePosition());
-            }
-            float dashSpeed = dashDistance / dashDuration;
-
-            #region old_PC.Dash
-            boxCollider.enabled = false;       //   disable collisions
-            float time = 0;
-            while (time < dashDuration) {
-                time += Time.deltaTime;
-                rb.position += dashDirection * dashSpeed * Time.deltaTime;
-                yield return null;
-            }
-            dashKeyPressed = false;
-            boxCollider.enabled = true;
-            #endregion
-
-            lastDashTime = Time.time;
-
-        }
-
-        Destroy(newDashCircle);
-
-        dashCircleActive = false;
-
-    } */
+    }
 
 
+    #region Utility
 
     Vector2 MousePosition() {
         return new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y);
     }
 
+    #endregion
 }
