@@ -121,7 +121,8 @@ public class Player : MonoBehaviour {
             float dashSpeed = dashDistance / dashDuration;
 
             // disattivo le collisioni
-            boxCollider.enabled = false;
+            // boxCollider.enabled = false;
+            gameObject.layer = 11;      //  Dash layer
 
             float dashTime = 0;
 
@@ -132,7 +133,8 @@ public class Player : MonoBehaviour {
             }
 
             // riattivo le collisioni
-            boxCollider.enabled = true;
+            // boxCollider.enabled = true;
+            gameObject.layer = 9;       //  Player layer
 
             // aggiorno il time dell'ultima dash
             lastDashTime = Time.time;
