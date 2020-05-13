@@ -47,11 +47,11 @@ public class Player : MonoBehaviour {
         canDash = (Time.time > lastDashTime + timeBetweenDashes);
 
         //  Questo funziona solo se si usa il mouse!!!
-        if (Input.GetMouseButtonDown(0)) {
+        if (Input.GetButtonDown("Dash")) {
             dashKeyPressed = true;
         }
 
-        if (Input.GetMouseButtonUp(0)) {
+        if (Input.GetButtonUp("Dash")) {
             dashKeyPressed = false;
             dashKeyReleased = true;
         }
