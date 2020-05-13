@@ -13,6 +13,9 @@ public class PlayerAttack : MonoBehaviour {
     public float attackRange = .5f;
     public LayerMask enemyLayers;
 
+    public float attackTypeTreshold = .5f;
+    bool attackKeyPressed = false;
+
 
     void Awake() {
         //animator = GetComponent<Animator>();
@@ -22,7 +25,12 @@ public class PlayerAttack : MonoBehaviour {
     void Update() {
 
         if (Input.GetButtonDown("Attack1")) {
-            Attack();
+            attackKeyPressed = true;
+            StartCoroutine(AttackType());
+        }
+        
+        if (Input.GetButtonUp("Attack1")) {
+            attackKeyPressed = false;
         }
 
 
@@ -43,6 +51,20 @@ public class PlayerAttack : MonoBehaviour {
 
 
     }
+
+    IEnumerator AttackType() {
+        float tempo = 0;
+        while (attackKeyPressed) {
+            tempo += Time.deltaTime;
+            yield return null;
+        }
+        print("tempo: " + tempo);
+        if (tempo < attackTypeTreshold) {       //  attacco semplice
+            Attack();
+        }       //  CATAPUGNO
+    }
+
+
 
     private void OnDrawGizmosSelected() {
         if (attackPoint != null) {
