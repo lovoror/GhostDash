@@ -10,7 +10,7 @@ public class Player : MonoBehaviour {
     public bool distanzaFissa = false;
 
     Rigidbody2D rb;
-    BoxCollider2D boxCollider;
+    public BoxCollider2D boxCollider;
     Animator animator;
 
     public GameObject dashCircleObj;
@@ -35,7 +35,7 @@ public class Player : MonoBehaviour {
 
         animator = GetComponent<Animator>();
 
-        boxCollider = GetComponent<BoxCollider2D>();
+        //boxCollider = GetComponent<BoxCollider2D>();
     }
 
     private void Start() {
@@ -121,8 +121,8 @@ public class Player : MonoBehaviour {
             float dashSpeed = dashDistance / dashDuration;
 
             // disattivo le collisioni
-            // boxCollider.enabled = false;
-            gameObject.layer = 11;      //  Dash layer
+            boxCollider.enabled = false;
+            // gameObject.layer = 11;      //  Dash layer
 
             float dashTime = 0;
 
@@ -133,8 +133,8 @@ public class Player : MonoBehaviour {
             }
 
             // riattivo le collisioni
-            // boxCollider.enabled = true;
-            gameObject.layer = 9;       //  Player layer
+            boxCollider.enabled = true;
+            //gameObject.layer = 9;       //  Player layer
 
             // aggiorno il time dell'ultima dash
             lastDashTime = Time.time;
