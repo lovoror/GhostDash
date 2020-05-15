@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class DashCircle : MonoBehaviour {
 
-    public bool followPlayer;
 
     Player player;
     float radius;
@@ -16,14 +15,18 @@ public class DashCircle : MonoBehaviour {
             player = FindObjectOfType<Player>();
         }
 
-        radius = player.dashDistance;
-        transform.localScale = new Vector3(radius*2, radius*2, transform.localScale.z);
+        radius = player.defaultDashDistance;
+        transform.localScale = new Vector3(radius * 2, radius * 2, transform.localScale.z);
+
+        UpdatePosition();
     }
 
 
-    void Update() {
-        if (player != null && followPlayer) {
+    public void UpdatePosition() {
+        if (player != null) {
             transform.position = player.transform.position;
         }
+        // print("dashCircle: position updated");  
     }
+
 }

@@ -16,8 +16,8 @@ TagManager:
   - 
   - Walls
   - Player
-  - 
-  - 
+  - Enemy
+  - Dash
   - 
   - 
   - 
@@ -39,6 +39,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Circle
+    uniqueID: 2638872381
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
