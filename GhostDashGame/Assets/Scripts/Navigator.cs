@@ -12,6 +12,8 @@ public class Navigator : MonoBehaviour
     public float rotationSpeed = 10f;
     public float nextWaypointTreshold = 1f;
 
+    public float avoidanceRadius = 2;
+
     Seeker seeker;
     Rigidbody2D rb;
     Path path;
@@ -36,7 +38,7 @@ public class Navigator : MonoBehaviour
             Vector2 velocity = (path.vectorPath[waypoint] - transform.position).normalized * speed * Time.fixedDeltaTime;
             float angularvel= Vector2.SignedAngle(transform.up, path.vectorPath[waypoint] - transform.position) * rotationSpeed * Time.fixedDeltaTime;
 
-            rb.velocity = velocity;
+            rb.velocity = safeVelocity(velocity);
             rb.angularVelocity = angularvel;
 
             // Debug.Log("vel=" + velocity + " ang vel=" + angularvel);
@@ -60,5 +62,73 @@ public class Navigator : MonoBehaviour
             path = p;
             waypoint = 0;
         }
+    }
+
+    Vector2 safeVelocity(Vector2 desiredVelocity)
+    {
+        Vector2 testVelocity = desiredVelocity;
+
+        GameObject[] npc = GameObject.FindGameObjectsWithTag("Enemy");
+
+        int k = 0;
+        float step = 0;
+        while (! checkRVO(npc, testVelocity) && step<10)
+        {
+            switch (k)
+            {
+                case 0:
+                    step += 0.1f;
+                    testVelocity = desiredVelocity + new Vector2(0, step);
+                    break;
+                case 1:
+                    testVelocity = desiredVelocity + new Vector2(step, step);
+                    break;
+                case 2:
+                    testVelocity = desiredVelocity + new Vector2(step, 0);
+                    break;
+                case 3:
+                    testVelocity = desiredVelocity + new Vector2(step, -step);
+                    break;
+                case 4:
+                    testVelocity = desiredVelocity + new Vector2(0, -step);
+                    break;
+                case 5:
+                    testVelocity = desiredVelocity + new Vector2(-step, -step);
+                    break;
+                case 6:
+                    testVelocity = desiredVelocity + new Vector2(-step, 0);
+                    break;
+                case 7:
+                    testVelocity = desiredVelocity + new Vector2(-step, 0);
+                    break;
+                case 8:
+                    testVelocity = desiredVelocity / step;
+                    break;
+            }
+
+            k=(k+1)%9;
+        }
+
+        Debug.Log("safeVelocity="+ testVelocity +" con step=" + step);
+
+        return testVelocity;
+    }
+
+    bool checkRVO(GameObject[] obstacles ,Vector2 desiredVelocity)
+    {
+        bool safe = true;
+        int k = 0;
+
+        while (safe && k++ < obstacles.Length-1) {
+            Vector2 relPos = obstacles[k].transform.position - transform.position;
+            if (0.01f < relPos.magnitude && relPos.magnitude < avoidanceRadius)
+            {
+                Vector2 relVel = desiredVelocity - obstacles[k].GetComponent<Rigidbody2D>().velocity;
+
+                safe = Vector2.Angle(relVel, relPos) > 80 && desiredVelocity.magnitude<=speed;
+            }
+        }
+
+        return safe;
     }
 }
